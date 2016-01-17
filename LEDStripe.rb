@@ -13,10 +13,10 @@ class LEDStripe
 
   ### send data over UDP ###
   def set(stripArray)
-    # beamMeUpScottie = UDPSocket.new
-    # beamMeUpScottie.connect("127.0.0.1", 4913)
-    # beamMeUpScottie.write @init.pack('C*') + @length + stripArray.pack('C*')
-    p stripArray.count/3
+    beamMeUpScottie = UDPSocket.new
+    beamMeUpScottie.connect("127.0.0.1", 4913)
+    beamMeUpScottie.write @init.pack('C*') + @length + stripArray.pack('C*')
+    # p stripArray.count/3
     @strip = []
   end
 
@@ -26,7 +26,7 @@ class LEDStripe
     [color[3].hex, color[2].hex, color[1].hex]
   end
 
-  ### modules ###
+  ### MODULES ###
   ### train modules ###
   def moduleTrain(length, pointer, trainLED, defaultLED)
     pointer.times do
@@ -62,7 +62,7 @@ class LEDStripe
     end
   end
 
-  ### functions ###
+  ### FUNCTIONS ###
   def gradientLine(box, startColor, endColor)
     moduleSolidColor 20, box
     moduleGradientLine Gradient.new(colors: [ '#' + startColor, '#' + endColor], steps: 103).hex
@@ -93,6 +93,8 @@ class LEDStripe
     3.times {lonelyWanderer << wanderer}
 
     loop do
+      # asc == true ? trainLED = Gradient.new(colors: ['#' + trainStartColor, '#' + trainEndColor], steps: length) : trainLED = Gradient.new(colors: ['#' + trainEndColor, '#' + trainStartColor], steps: length)
+
       trainLED = Gradient.new(colors: ['#' + trainStartColor, '#' + trainEndColor], steps: length)
 
       boxTrain boxPointer, lonelyWanderer, boxLED
