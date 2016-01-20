@@ -1,1 +1,2 @@
-# LEDStripe-c3d2-ruby
+# Bibliothek für die LEDStripes im C3D2
+###### Programmiersprache: Ruby
